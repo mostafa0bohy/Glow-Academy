@@ -1,0 +1,112 @@
+--Query 1: total attendance per students 
+
+SELECT 
+    st.name Student,
+    g.guide Advisor,
+    SUM(att.grade) AS attendance,
+    SUM(att.grade) / COUNT(DISTINCT att.week) / COUNT(DISTINCT att.sub_code) * 100 AS Attendace_Percentage
+FROM
+    acad_attendance att
+        JOIN
+    acad_students st ON st.code = att.st_code
+        JOIN
+    acad_guides g ON g.code = st.g_code
+GROUP BY 1 , 2
+ORDER BY 3 DESC
+
+--
+
+SELECT 
+    st.name Student,
+    g.guide Advisor,
+    att.week Week,
+    att.suB_Code as Subject,
+    SUM(att.grade) AS attendance,
+    SUM(att.grade) / COUNT(DISTINCT att.week) / COUNT(DISTINCT att.sub_code) * 100 AS Attendace_Percentage
+FROM
+    acad_attendance att
+        JOIN
+    acad_students st ON st.code = att.st_code
+        JOIN
+    acad_guides g ON g.code = st.g_code
+
+GROUP BY 1 , 2 , 3 , 4
+ORDER BY 5 DESC
+
+
+
+
+--َQuery 2:  total percentage per mentors
+
+SELECT 
+    g.guide Advisor,
+    SUM(att.grade) AS attendance,
+    SUM(att.grade) / COUNT(DISTINCT att.week) / COUNT(DISTINCT att.sub_code)/ count(distinct st.name) * 100 AS Attendace_Percentage
+FROM
+    acad_attendance att
+        JOIN
+    acad_students st ON st.code = att.st_code
+        JOIN
+    acad_guides g ON g.code = st.g_code
+GROUP BY 1 
+ORDER BY 3 DESC
+
+--
+
+SELECT 
+    g.guide Advisor,
+    att.week week,
+    att.sub_code Subject,
+    SUM(att.grade) AS attendance,
+    SUM(att.grade) / COUNT(DISTINCT att.week) / COUNT(DISTINCT att.sub_code)/ count(distinct st.name) * 100 AS Attendace_Percentage
+FROM
+    acad_attendance att
+        JOIN
+    acad_students st ON st.code = att.st_code
+        JOIN
+    acad_guides g ON g.code = st.g_code
+GROUP BY 1 , 2 , 3
+ORDER BY 5 DESC
+
+
+--Query 3: overall attendance percentage
+
+SELECT 
+    SUM(att.grade) AS attendance,
+    SUM(att.grade) / COUNT(DISTINCT att.week) / COUNT(DISTINCT att.sub_code)/ count(distinct st.name) * 100 AS Attendace_Percentage
+FROM
+    acad_attendance att
+        JOIN
+    acad_students st ON st.code = att.st_code
+        JOIN
+    acad_guides g ON g.code = st.g_code
+	
+--
+
+SELECT 
+    g.guide Advisor,
+    att.week Week,
+    att.sub_code Subject,
+    SUM(att.grade) AS attendance,
+    SUM(att.grade) / COUNT(DISTINCT att.week) / COUNT(DISTINCT att.sub_code)/ count(distinct st.name) * 100 AS Attendace_Percentage
+FROM
+    acad_attendance att
+        JOIN
+    acad_students st ON st.code = att.st_code
+        JOIN
+    acad_guides g ON g.code = st.g_code
+ 
+group by 1 , 2 , 3 
+order by 5 desc
+
+
+
+
+
+
+
+
+
+
+
+--Query 5: attendance percentage per 
