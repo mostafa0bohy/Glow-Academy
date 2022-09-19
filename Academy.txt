@@ -98,15 +98,3 @@ FROM
  
 group by 1 , 2 , 3 
 order by 5 desc
-
-
-
-
-
-
-
-
-
-
-
---Query 5: attendance percentage per 
